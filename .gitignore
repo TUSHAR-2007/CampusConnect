@@ -1,0 +1,32 @@
+# Python virtual environment
+venv/
+.venv/
+env/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+*.pyo
+
+# SQLite database (auto-created on first server run)
+*.db
+*.sqlite3
+
+# Environment variables / secrets
+.env
+.env.*
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
