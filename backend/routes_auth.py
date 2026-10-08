@@ -93,7 +93,7 @@ def login(body: LoginRequest):
     Authenticate a student and return a login token.
 
     Request body: { "email": "...", "password": "..." }
-    Success 200:  { "token": "...", "user": { "id": ..., "full_name": ..., "email": ..., "created_at": ... } }
+    Success 200:  { "token": "...", "user": { "id": ..., "full_name": ..., "email": ... } }
     Errors:
       401 — "Invalid email or password." (same message whether email or password is wrong,
              so the caller cannot determine which field failed — spec.md section 15)
