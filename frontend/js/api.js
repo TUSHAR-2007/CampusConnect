@@ -139,13 +139,12 @@ async function apiRequest(endpoint, options = {}) {
       message = data;
     }
 
-    // Handle 401 Unauthorized
-    if (response.status === 401) {
-      // If unauthorized on an authenticated request, clear invalid token
-      if (token) {
-        clearToken();
-      }
-      // Redirect to login if on a protected page
+    // Handle 401 Unauthorized on authenticated requests
+    if (response.status === 401 && config.auth !== false && endpoint !== "/auth/login") {
+      // Clear stale/expired token
+      clearToken();
+
+      // Redirect to login if currently on a protected page
       const currentPath = window.location.pathname;
       const isAuthPage = currentPath.endsWith("index.html") || currentPath === "/" || currentPath.endsWith("/");
       if (!isAuthPage) {

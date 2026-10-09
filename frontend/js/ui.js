@@ -37,6 +37,21 @@ function renderNavbar(activePage = "") {
 }
 
 /**
+ * Utility to escape HTML special characters for safe string interpolation.
+ * @param {string} text - The input string.
+ * @returns {string} The escaped string.
+ */
+function escapeHtml(text) {
+  if (!text) return "";
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
  * Generate HTML string for an issue status badge.
  * Always renders both a colored dot and text label (spec.md section 16).
  * 
@@ -53,6 +68,12 @@ function createStatusBadge(status) {
   } else if (status === "Resolved") {
     badgeClass = "status-resolved";
     label = "Resolved";
+  } else if (status === "Open") {
+    badgeClass = "status-open";
+    label = "Open";
+  } else {
+    badgeClass = "status-open";
+    label = escapeHtml(String(status || "Open"));
   }
 
   return `<span class="status-badge ${badgeClass}">${label}</span>`;
