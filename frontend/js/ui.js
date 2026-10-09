@@ -96,6 +96,37 @@ function showMessage(container, message, type = "error") {
 }
 
 /**
+ * Display an error banner message.
+ * @param {HTMLElement|string} container - The DOM element or ID.
+ * @param {string} message - The error message.
+ */
+function showError(container, message) {
+  showMessage(container, message, "error");
+}
+
+/**
+ * Display a success banner message.
+ * @param {HTMLElement|string} container - The DOM element or ID.
+ * @param {string} message - The success message.
+ */
+function showSuccess(container, message) {
+  showMessage(container, message, "success");
+}
+
+/**
+ * Display a loading indicator inside a container.
+ * @param {HTMLElement|string} container - The DOM element or ID.
+ * @param {string} [message="Loading..."] - The loading message.
+ */
+function showLoading(container, message = "Loading...") {
+  const el = typeof container === "string" ? document.getElementById(container) : container;
+  if (!el) return;
+
+  el.className = "loading-indicator";
+  el.textContent = message;
+}
+
+/**
  * Clear and hide a banner message container.
  * @param {HTMLElement|string} container - The DOM element or ID of the message container.
  */
