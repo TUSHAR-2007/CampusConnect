@@ -1,0 +1,660 @@
+/*
+================================================================================
+  CampusConnect — Shared Stylesheet
+  Follows spec.md section 13 (CSS organization) & section 16 (UI/UX)
+================================================================================
+  1. Design Tokens (CSS Variables)
+  2. Base / Reset / Typography
+  3. Layout & Containers
+  4. Navigation Bar
+  5. Buttons
+  6. Cards
+  7. Forms & Inputs
+  8. Status Badges & Category Chips
+  9. Messages (Error, Success, Empty, Loading)
+ 10. Responsive Rules
+================================================================================
+*/
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens (CSS Variables)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Colors from spec.md section 16 */
+  --color-primary: #9E1B32;        /* Deep university red: header, primary buttons */
+  --color-primary-dark: #7D1527;   /* Hover state for primary buttons */
+  --color-primary-light: #FDECEC;  /* Light tint for subtle highlights */
+  --color-bg: #F5F5F7;             /* Soft off-white page background */
+  --color-card: #FFFFFF;           /* Pure white cards */
+  --color-text: #2B2B2B;           /* Dark charcoal primary text */
+  --color-muted: #6B6B6B;          /* Secondary / muted text */
+  --color-border: #E3E3E6;         /* Card and input borders */
+
+  /* Status Colors */
+  --color-open: #B42318;           /* Open status badge text / border */
+  --color-open-bg: #FDECEC;        /* Open status badge background */
+  --color-progress: #8A5A00;       /* In Progress badge text / border */
+  --color-progress-bg: #FFF4D6;    /* In Progress badge background */
+  --color-resolved: #1B6E3A;       /* Resolved badge text / border */
+  --color-resolved-bg: #E3F6E8;    /* Resolved badge background */
+
+  /* Typography */
+  --font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Sizing & Radius */
+  --radius-card: 12px;
+  --radius-btn: 8px;
+  --radius-input: 8px;
+  --radius-pill: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-dropdown: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+  /* Layout */
+  --container-max-width: 1100px;
+}
+
+/* --------------------------------------------------------------------------
+   2. Base / Reset / Typography
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.25;
+}
+
+h1 { font-size: 1.5rem; }    /* 24px */
+h2 { font-size: 1.25rem; }   /* 20px */
+h3 { font-size: 1.125rem; }  /* 18px */
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+small, .text-muted {
+  font-size: 0.875rem;       /* 14px */
+  color: var(--color-muted);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 150ms ease;
+}
+
+a:hover, a:focus-visible {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   3. Layout & Containers
+   -------------------------------------------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.main-content {
+  flex: 1 0 auto;
+  padding: 24px 0 40px;
+}
+
+.auth-wrapper {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+/* Page Header */
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.page-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* App Footer */
+.site-footer {
+  text-align: center;
+  padding: 20px 16px;
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-card);
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   4. Navigation Bar
+   -------------------------------------------------------------------------- */
+.navbar {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 56px;
+  padding: 8px 16px;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navbar-brand:hover, .navbar-brand:focus-visible {
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.navbar-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-decoration: none;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.nav-link:hover, .nav-link:focus-visible {
+  color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.nav-link.active {
+  color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-weight: 700;
+}
+
+.nav-btn-logout {
+  background: none;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #FFFFFF;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.nav-btn-logout:hover, .nav-btn-logout:focus-visible {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: #FFFFFF;
+}
+
+/* --------------------------------------------------------------------------
+   5. Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;              /* Touch-friendly 44px minimum */
+  padding: 10px 20px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: var(--radius-btn);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.btn:disabled, .btn[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  border-color: var(--color-primary);
+}
+
+.btn-primary:hover, .btn-primary:focus-visible {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  text-decoration: none;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.btn-outline:hover, .btn-outline:focus-visible {
+  background-color: #ECECEF;
+  text-decoration: none;
+}
+
+.btn-block {
+  width: 100%;
+  display: flex;
+}
+
+.btn-sm {
+  min-height: 36px;
+  padding: 6px 12px;
+  font-size: 0.875rem;
+}
+
+/* --------------------------------------------------------------------------
+   6. Cards
+   -------------------------------------------------------------------------- */
+.card {
+  background-color: var(--color-card);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  padding: 20px;
+  margin-bottom: 16px;
+  transition: border-color 150ms ease;
+}
+
+.card-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 12px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+/* Auth Card */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 28px 24px;
+  margin: 0 auto;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-brand {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+
+.auth-subtitle {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  margin: 0;
+}
+
+/* Auth Tabs */
+.auth-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--color-border);
+  margin-bottom: 24px;
+  gap: 8px;
+}
+
+.auth-tab {
+  flex: 1;
+  text-align: center;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  padding: 12px 16px;
+  min-height: 44px;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  cursor: pointer;
+  margin-bottom: -2px;
+  transition: color 150ms ease, border-color 150ms ease;
+}
+
+.auth-tab:hover {
+  color: var(--color-text);
+}
+
+.auth-tab.active {
+  color: var(--color-primary);
+  border-bottom-color: var(--color-primary);
+}
+
+.auth-tab:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   7. Forms & Inputs
+   -------------------------------------------------------------------------- */
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.form-control {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  font-family: var(--font-family);
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  box-sizing: border-box;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.form-control:focus {
+  border-color: var(--color-primary);
+  outline: 2px solid rgba(158, 27, 50, 0.2);
+  outline-offset: 0;
+}
+
+.form-control::placeholder {
+  color: #9E9EA7;
+}
+
+textarea.form-control {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+select.form-control {
+  appearance: auto;
+  cursor: pointer;
+}
+
+/* Error states */
+.form-control.input-error,
+.form-control:invalid:not(:placeholder-shown):not(:focus) {
+  border-color: var(--color-open);
+}
+
+.form-control.input-error:focus {
+  outline-color: rgba(180, 35, 24, 0.2);
+}
+
+.field-error {
+  color: var(--color-open);
+  font-size: 0.8125rem;
+  margin-top: 5px;
+  display: none;
+  font-weight: 500;
+}
+
+.field-error.visible {
+  display: block;
+}
+
+.field-hint {
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  margin-top: 5px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Status Badges & Category Chips
+   -------------------------------------------------------------------------- */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.status-badge::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.status-open {
+  background-color: var(--color-open-bg);
+  color: var(--color-open);
+}
+.status-open::before {
+  background-color: var(--color-open);
+}
+
+.status-progress {
+  background-color: var(--color-progress-bg);
+  color: var(--color-progress);
+}
+.status-progress::before {
+  background-color: var(--color-progress);
+}
+
+.status-resolved {
+  background-color: var(--color-resolved-bg);
+  color: var(--color-resolved);
+}
+.status-resolved::before {
+  background-color: var(--color-resolved);
+}
+
+/* Category Chip */
+.category-chip {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background-color: #ECECEF;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+/* --------------------------------------------------------------------------
+   9. Messages (Error, Success, Empty, Loading)
+   -------------------------------------------------------------------------- */
+.message-box {
+  padding: 12px 16px;
+  border-radius: var(--radius-btn);
+  margin-bottom: 18px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  display: none;
+}
+
+.message-box.visible {
+  display: block;
+}
+
+.message-error {
+  background-color: var(--color-open-bg);
+  color: var(--color-open);
+  border: 1px solid rgba(180, 35, 24, 0.3);
+}
+
+.message-success {
+  background-color: var(--color-resolved-bg);
+  color: var(--color-resolved);
+  border: 1px solid rgba(27, 110, 58, 0.3);
+}
+
+.message-info {
+  background-color: #EBF5FF;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--color-muted);
+}
+
+.empty-state-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 8px;
+}
+
+.loading-indicator {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--color-muted);
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. Responsive Rules
+   -------------------------------------------------------------------------- */
+/* Tablet (min-width: 600px) */
+@media (min-width: 600px) {
+  .page-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .auth-card {
+    padding: 36px 32px;
+  }
+}
+
+/* Desktop (min-width: 1024px) */
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .main-content {
+    padding: 32px 0 60px;
+  }
+}
