@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CampusConnect — Profile</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar rendered by ui.js -->
+  <div id="navbar-container"></div>
+
+  <main class="main-content">
+    <div class="container" style="max-width: 600px;">
+      <div class="page-header">
+        <h1 class="page-title">Student Profile</h1>
+      </div>
+
+      <div id="loading" class="loading-indicator">Loading profile…</div>
+      <div id="profile-message" class="message-box" role="alert"></div>
+
+      <article id="profile-card" class="card" style="display: none;">
+        <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--color-border);">
+          <div id="avatar" style="width: 56px; height: 56px; border-radius: 50%; background-color: var(--color-primary); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; flex-shrink: 0;" aria-hidden="true"></div>
+          <div>
+            <h2 id="profile-name" style="margin: 0; font-size: 1.25rem;"></h2>
+            <p id="profile-email" class="text-muted" style="margin: 4px 0 0 0; font-size: 0.9375rem;"></p>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px;">
+          <div>
+            <span class="text-muted" style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 2px;">Member Since</span>
+            <span id="profile-since" style="font-size: 1rem;"></span>
+          </div>
+          <div>
+            <span class="text-muted" style="display: block; font-size: 0.875rem; font-weight: 600; margin-bottom: 2px;">Issues Reported</span>
+            <span id="profile-count" style="font-size: 1rem;"></span>
+          </div>
+        </div>
+
+        <div>
+          <button type="button" id="logout-button" class="btn btn-secondary btn-block">Log Out</button>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>CampusConnect · College Issue Reporting System</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/profile.js"></script>
+</body>
+</html>
